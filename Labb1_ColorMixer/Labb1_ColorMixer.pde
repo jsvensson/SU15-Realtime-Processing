@@ -11,9 +11,9 @@ int colorCircleSize = 150;
 int selectedCircle = 0;
 
 ColorCircle[] colorCircles = {
-  new ColorCircle(100, 220, colorCircleSize),
-  new ColorCircle(280, 220, colorCircleSize),
-  new ColorCircle(460, 220, colorCircleSize)
+  new ColorCircle(100, 220, colorCircleSize, rgbColors[0]), 
+  new ColorCircle(280, 220, colorCircleSize, rgbColors[0]), 
+  new ColorCircle(460, 220, colorCircleSize, rgbColors[0])
 };
 
 
@@ -42,26 +42,10 @@ void drawTiles()
 
 void drawCircles()
 {
-  // Red circle
-  setCircleColors(0);
-  ellipse(100, 220, colorCircleSize, colorCircleSize);
-
-  // Green circle
-  setCircleColors(1);
-  ellipse(280, 220, colorCircleSize, colorCircleSize);
-
-  // Blue circle
-  setCircleColors(2);
-  ellipse(460, 220, colorCircleSize, colorCircleSize);
-}
-
-color getRandomColor()
-{
-  int r = int(random(0, 255));
-  int g = int(random(0, 255));
-  int b = int(random(0, 255));
-
-  return color(r, g, b);
+  for (int i = 0; i < colorCircles.length; i++)
+  {
+    colorCircles[i].update();
+  }
 }
 
 void selectCircle(int c)
@@ -81,14 +65,4 @@ void setCircleColors(int c)
     strokeWeight(0);
     stroke(0);
   }
-}
-
-boolean circleCircleInterSects(int c1x, int c1y, int c1r, int c2x, int c2y, int c2r)
-{
-  return dist(c1x, c1y, c2x, c2y) < c1r + c2r;
-}
-
-boolean circleMouseInterSects(int cx, int cy, int cr)
-{
-  return dist(cx, cy, mouseX, mouseY) < cr;
 }
