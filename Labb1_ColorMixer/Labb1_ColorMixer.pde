@@ -12,8 +12,8 @@ int selectedCircle = 0;
 
 ColorCircle[] colorCircles = {
   new ColorCircle(100, 220, colorCircleSize, rgbColors[0]), 
-  new ColorCircle(280, 220, colorCircleSize, rgbColors[0]), 
-  new ColorCircle(460, 220, colorCircleSize, rgbColors[0])
+  new ColorCircle(280, 220, colorCircleSize, rgbColors[1]), 
+  new ColorCircle(460, 220, colorCircleSize, rgbColors[2])
 };
 
 
@@ -31,6 +31,9 @@ void draw()
 
 void drawTiles()
 {
+  stroke(0);
+  strokeWeight(1);
+  
   // Tile A
   fill(tileColorA);
   rect(20, 20, 240, 100);

@@ -15,12 +15,21 @@ class ColorCircle
 
   void update()
   {
+    if (MouseOver())
+    {
+      strokeWeight(3);
+      stroke(255);
+    } else {
+      strokeWeight(1);
+      stroke(0);
+    }
+
     fill(circleColor);
     ellipse(posX, posY, radius, radius);
   }
 
-  boolean mouseInterSects()
+  boolean MouseOver()
   {
-    return dist(posX, posY, mouseX, mouseY) < radius;
+    return dist(posX, posY, mouseX, mouseY) < radius / 2;
   }
 }
