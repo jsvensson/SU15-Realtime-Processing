@@ -1,8 +1,22 @@
-color tileColorA = getRandomColor();
+color tileColorA = color(20, 20, 20); //<>//
+
 color tileColorB = color(0, 0, 0);
+
+// Extract RGB values from tile A
+int[] correctColors = {20, 20, 20};
 
 // Currently picked color from circles
 int[] chosenColor = {0, 0, 0};
+
+// State for correct color found
+boolean[] colorMatch = {false, false, false};
+
+// Correct color tolerance
+int colorTolerance = 16;
+
+// Various states
+boolean foundCorrectColor = false;
+boolean havePrintedWinMessage = false;
 
 // Fill color of color circles
 color[] rgbCircleColors = {
@@ -35,6 +49,8 @@ void draw()
   updateSelectedCircle();
   drawTiles();
   drawCircles();
+  checkMatchingColors();
+  checkIfGameFinished();
 }
 
 void drawTiles()
@@ -82,6 +98,42 @@ void updateColorPicker()
   int b = chosenColor[2];
 
   tileColorB = color(r, g, b);
+}
+
+void checkMatchingColors()
+{
+  for (int i = 0; i <= 2; i++)
+  {
+    colorMatch[i] = colorInRange(chosenColor[i], correctColors[i], colorTolerance);
+  }
+
+  if (correctColorFound())
+  {
+    foundCorrectColor = true;
+  } else {
+    foundCorrectColor = false;
+  }
+}
+
+void checkIfGameFinished()
+{
+  if (foundCorrectColor && !havePrintedWinMessage)
+  {
+    println("Found the right color!");
+    havePrintedWinMessage = true;
+  } else {
+    havePrintedWinMessage = false;
+  }
+}
+
+boolean colorInRange(int value, int target, int range)
+{
+  return (value <= target + range) && (value >= target - range);
+}
+
+boolean correctColorFound()
+{
+  return colorMatch[0] && colorMatch[1] && colorMatch[2];
 }
 
 void keyPressed()
