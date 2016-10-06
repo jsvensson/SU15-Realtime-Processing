@@ -1,5 +1,5 @@
 color tileColorA = getRandomColor();
-color tileColorB = color(0, 0, 0);
+color tileColorB = getRandomColor();
 
 // Currently picked color from circles
 int[] chosenColor = {0, 0, 0};
@@ -88,18 +88,14 @@ void keyPressed()
 {
   int newColor = chosenColor[selectedColor];
 
-  switch(key)
+  switch(keyCode)
   {
-  case 'w':
-  case 'W':
-    newColor = MaxColor(++newColor);
-    break;
-  case 's':
-  case 'S':
-    newColor = MaxColor(--newColor);
-    break;
+    case UP:
+    newColor = max(++newColor, 255);
+    case DOWN:
+    newColor = min(++newColor, 0);
   }
-
+  
   chosenColor[selectedColor] = newColor;
   println("Chosen color is now " + newColor);
 }

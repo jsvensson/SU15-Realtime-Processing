@@ -7,12 +7,19 @@ color getRandomColor()
   return color(r, g, b);
 }
 
-boolean circleCircleInterSects(int c1x, int c1y, int c1r, int c2x, int c2y, int c2r)
+boolean circleInterSectsCircle(int firstCircleX, int firstCircleY, int firstCircleRadius, 
+  int secondCircleX, int secondCircleY, int secondCircleRadius)
 {
-  return dist(c1x, c1y, c2x, c2y) < c1r + c2r;
+  float d = dist(firstCircleX, firstCircleY, secondCircleX, secondCircleY);
+  return d < firstCircleRadius + secondCircleRadius;
 }
 
-boolean circleMouseInterSects(int cx, int cy, int cr)
+boolean mouseOverCircle(int circleX, int circleY, int diameter)
 {
-  return dist(cx, cy, mouseX, mouseY) < cr;
+  return dist(circleX, circleY, mouseX, mouseY) < diameter / 2;
+}
+
+int MaxColor(int value)
+{
+  return min(255, max(0, value));
 }

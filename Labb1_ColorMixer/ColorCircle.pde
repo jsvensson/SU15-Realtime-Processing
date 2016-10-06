@@ -1,19 +1,30 @@
 class ColorCircle
 {
-  int posX, posY;
-  int radius;
+  int x, y;
+  int diameter;
   color circleColor;
-  boolean stateChanged;
+  color strokeColor;
 
-  ColorCircle(int x, int y, int r, color c)
+  ColorCircle(int x, int y, int diameter, color c)
   {
-    posX = x;
-    posY = y;
-    radius = r;
+    this.x = x;
+    this.y = y;
+    this.diameter = diameter;
+
+    // Colors
     circleColor = c;
+    strokeColor = 0;  // Default black
   }
 
-  void update()
+  void Update()
+  {
+    UpdateStroke();
+
+    fill(circleColor);
+    ellipse(x, y, diameter, diameter);
+  }
+
+  void UpdateStroke()
   {
     if (MouseOver())
     {
@@ -23,13 +34,10 @@ class ColorCircle
       strokeWeight(1);
       stroke(0);
     }
-
-    fill(circleColor);
-    ellipse(posX, posY, radius, radius);
   }
 
   boolean MouseOver()
   {
-    return dist(posX, posY, mouseX, mouseY) < radius / 2;
+    return dist(x, y, mouseX, mouseY) < diameter / 2;
   }
 }
